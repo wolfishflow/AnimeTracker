@@ -7,3 +7,34 @@ query FindTitle($id: Int!) {
         type
     }
 }
+
+query GetNeonGenesisEvangelionAnime {
+    Media(id: 30) {
+        title {
+            english
+        }
+        coverImage {
+            extraLarge
+            large
+            color
+        }
+    }
+}
+
+
+query getPage($pageNumber: Int!) {
+    Page(page: $pageNumber, perPage: 25) {
+        media {
+            id
+            title {
+                english
+            }
+            coverImage {
+                extraLarge
+                large
+                medium
+                color
+            }
+        }
+    }
+}
