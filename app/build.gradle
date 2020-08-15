@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id("com.apollographql.apollo").version("$apollo_version")
 }
 
 android {
@@ -51,4 +52,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
+    //Apollo
+    implementation("com.apollographql.apollo:apollo-runtime:$apollo_version")
+    implementation("com.apollographql.apollo:apollo-coroutines-support:$apollo_version")
 }
