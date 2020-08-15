@@ -71,4 +71,8 @@ dependencies {
     //Apollo
     implementation "com.apollographql.apollo:apollo-runtime:$apollo_version"
     implementation "com.apollographql.apollo:apollo-coroutines-support:$apollo_version"
+
+    //Coil
+    implementation("io.coil-kt:coil:0.11.0")
+
 }
