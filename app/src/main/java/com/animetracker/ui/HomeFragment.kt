@@ -26,29 +26,4 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            getTitle()?.let { loadArtAndTitle(it) }
-//        }
-    }
-
-//    private suspend fun getTitle(): GetNeonGenesisEvangelionAnimeQuery.Media? {
-//        val neonGenesisResult: GetNeonGenesisEvangelionAnimeQuery.Media?
-//        withContext(Dispatchers.IO) {
-//            val apolloClient = AniListClient().getClient()
-//            val response = apolloClient.query(GetNeonGenesisEvangelionAnimeQuery()).toDeferred().await()
-//            neonGenesisResult = response.data?.media
-//        }
-//        return neonGenesisResult
-//    }
-//
-//    private fun loadArtAndTitle(result :GetNeonGenesisEvangelionAnimeQuery.Media) {
-//        binding.titleTextView.text = result.title?.english
-//        binding.coverImageImageView.load(result.coverImage?.extraLarge) {
-//            crossfade(true)
-//            placeholder(ColorDrawable(Color.parseColor(result.coverImage?.color)))
-//        }
-//    }
 }

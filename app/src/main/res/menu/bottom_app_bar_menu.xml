@@ -12,6 +12,7 @@
         android:id="@+id/more"
         android:title="@string/more"
         android:contentDescription="@string/todo"
-        app:showAsAction="never"
+        android:icon="@drawable/ic_more_vert_black_24dp"
+        app:showAsAction="ifRoom"
         />
 </menu>
