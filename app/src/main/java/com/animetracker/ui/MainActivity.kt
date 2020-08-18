@@ -31,8 +31,10 @@ class MainActivity : AppCompatActivity() {
             setOnMenuItemClickListener(
                 Toolbar.OnMenuItemClickListener {
                     when (it.itemId) {
-                        R.id.search -> Toast.makeText(context, "Search Clicked", Toast.LENGTH_SHORT).show()
-                        R.id.more -> Toast.makeText(context, "More Clicked", Toast.LENGTH_SHORT).show()
+                        R.id.search ->
+                            Toast.makeText(context, "Search Clicked", Toast.LENGTH_SHORT).show()
+                        R.id.more ->
+                            Toast.makeText(context, "More Clicked", Toast.LENGTH_SHORT).show()
                     }
                     return@OnMenuItemClickListener true
                 }
