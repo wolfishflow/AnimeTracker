@@ -21,5 +21,4 @@ class HomeViewModel : ViewModel() {
         Pager(PagingConfig(20)) {
             AnimeSortedByPagingSource(listOf(MediaSort.POPULARITY_DESC, MediaSort.SCORE_DESC).toInput())
         }.flow.cachedIn(viewModelScope)
-
 }

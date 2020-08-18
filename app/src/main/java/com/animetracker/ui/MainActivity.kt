@@ -1,9 +1,8 @@
 package com.animetracker.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.animetracker.R
 import com.animetracker.databinding.ActivityMainBinding
@@ -29,13 +28,17 @@ class MainActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-            setOnMenuItemClickListener(Toolbar.OnMenuItemClickListener {
-                when(it.itemId) {
-                    R.id.search -> Toast.makeText(context, "Search Clicked", Toast.LENGTH_SHORT).show()
-                    R.id.more -> Toast.makeText(context, "More Clicked", Toast.LENGTH_SHORT).show()
+            setOnMenuItemClickListener(
+                Toolbar.OnMenuItemClickListener {
+                    when (it.itemId) {
+                        R.id.search ->
+                            Toast.makeText(context, "Search Clicked", Toast.LENGTH_SHORT).show()
+                        R.id.more ->
+                            Toast.makeText(context, "More Clicked", Toast.LENGTH_SHORT).show()
+                    }
+                    return@OnMenuItemClickListener true
                 }
-                return@OnMenuItemClickListener true
-            })
+            )
         }
 
         binding.fab.apply {
