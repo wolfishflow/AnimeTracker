@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.animetracker.databinding.AtpItemBinding
 
-//todo rename this class
+// todo rename this class
 class AllTimePopularAdapter :
     PagingDataAdapter<GetAllTimePopularAnimeQuery.Medium, AtpViewHolder>(AtpComparator) {
     override fun onBindViewHolder(holder: AtpViewHolder, position: Int) {
@@ -26,10 +26,10 @@ class AllTimePopularAdapter :
     }
 }
 
-//TODO determine how to refactor the ViewHolder + adapter for reusability?
+// TODO determine how to refactor the ViewHolder + adapter for reusability?
 class AtpViewHolder(private val binding: AtpItemBinding) : RecyclerView.ViewHolder(binding.root) {
     fun setData(data: GetAllTimePopularAnimeQuery.Medium) {
-        //todo handle null english
+        // todo handle null english
         binding.titleTextView.text = data.title?.english
         binding.imageView.load(data.coverImage?.extraLarge) {
             crossfade(300)
@@ -51,5 +51,4 @@ object AtpComparator : DiffUtil.ItemCallback<GetAllTimePopularAnimeQuery.Medium>
     ): Boolean {
         return oldItem == newItem
     }
-
 }
