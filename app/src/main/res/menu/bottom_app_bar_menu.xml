@@ -6,13 +6,12 @@
         android:icon="@drawable/ic_search_black_24dp"
         android:title="@string/search"
         android:contentDescription="@string/todo"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/more"
         android:title="@string/more"
         android:contentDescription="@string/todo"
         android:icon="@drawable/ic_more_vert_black_24dp"
-        app:showAsAction="ifRoom"
-        />
+        app:showAsAction="ifRoom" />
 </menu>

@@ -14,5 +14,4 @@ class HomeViewModel : ViewModel() {
         Pager(PagingConfig(20)) {
             AllTimePopularPagingSource()
         }.flow.cachedIn(viewModelScope)
-
 }

@@ -22,7 +22,8 @@ class HomeFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
@@ -43,12 +44,11 @@ class HomeFragment : Fragment() {
         recyclerView.adapter = adapter
         lifecycleScope.launch {
             homeViewModel.result.collect { pagingData ->
-               pagingData.let {
-                   //todo handle empty data?
+                pagingData.let {
+                    // todo handle empty data?
                     adapter.submitData(it)
-               }
+                }
             }
         }
     }
-
 }
