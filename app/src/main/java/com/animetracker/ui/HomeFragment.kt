@@ -18,11 +18,12 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by viewModels()
-    private lateinit var adapter: AllTimePopularAdapter
+    private lateinit var adapter: AnimeSortedByAdapter
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
@@ -37,18 +38,17 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = AllTimePopularAdapter()
+        adapter = AnimeSortedByAdapter()
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.adapter = adapter
         lifecycleScope.launch {
-            homeViewModel.result.collect { pagingData ->
-               pagingData.let {
-                   //todo handle empty data?
+            homeViewModel.trendingAnime.collect { pagingData ->
+                pagingData.let {
+                    // todo handle empty data?
                     adapter.submitData(it)
-               }
+                }
             }
         }
     }
-
 }

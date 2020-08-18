@@ -1,24 +1,11 @@
-query GetNeonGenesisEvangelionAnime {
-    Media(id: 30) {
-        title {
-            english
-        }
-        coverImage {
-            extraLarge
-            large
-            color
-        }
-    }
-}
-
-query getAllTimePopularAnime($pageNumber: Int!) {
+query getAnimeSortedByPopularity($pageNumber: Int!, $sortingFilter: [MediaSort!]) {
     Page(page: $pageNumber) {
         pageInfo {
             total
             lastPage
             hasNextPage
         }
-        media(type: ANIME, sort: [POPULARITY_DESC, SCORE_DESC]) {
+        media(type: ANIME, sort: $sortingFilter) {
             id
             title {
                 english
@@ -27,7 +14,6 @@ query getAllTimePopularAnime($pageNumber: Int!) {
             coverImage {
                 extraLarge
                 large
-                medium
                 color
             }
         }
