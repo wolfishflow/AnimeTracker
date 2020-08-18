@@ -6,6 +6,7 @@ This project will also serve as an experiment for understanding Github Actions
 AnimeTracker uses Anlist's API: https://anilist.gitbook.io/anilist-apiv2-docs/
 
 This API is GraphQL based so Apollo Android seemed like the ideal library to use: 
+
 Documentation: https://www.apollographql.com/docs/android/
 
 ## Languages Used
