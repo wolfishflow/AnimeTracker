@@ -1,8 +1,9 @@
 package com.animetracker.network
 
 import com.apollographql.apollo.ApolloClient
+import com.ihsanbal.logging.Level
+import com.ihsanbal.logging.LoggingInterceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 
 class AniListClient {
 
@@ -15,8 +16,9 @@ class AniListClient {
     }
 
     private fun createClient(): ApolloClient {
+
         val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .addInterceptor(LoggingInterceptor.Builder().setLevel(Level.BODY).build())
             .build()
 
         return ApolloClient.builder()

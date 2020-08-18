@@ -5,58 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.HomeFragment">
 
-<!--TODO remove this. currently lets me test the scroll behaviour of bottom app bar in activity-->
-    <androidx.core.widget.NestedScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@color/teal_700" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@color/teal_200" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@color/teal_700" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@color/teal_200" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@color/teal_700" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@color/teal_200" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@color/teal_700" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@color/teal_200" />
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
+        android:layout_height="match_parent"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
