@@ -51,7 +51,7 @@ class AnimeSortedByViewHolder(private val binding: AtpItemBinding) : RecyclerVie
         binding.titleTextView.text = title
         binding.imageView.load(data.coverImage?.extraLarge) {
             crossfade(300)
-            data.coverImage?.color?.let { placeholder(ColorDrawable(Color.parseColor(it))) }
+            data.coverImage?.color?.let {  placeholder(ColorDrawable(Color.parseColor(it))) }
         }
     }
 }
