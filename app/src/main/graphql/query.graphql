@@ -19,3 +19,30 @@ query getAnimeSortedByPopularity($pageNumber: Int!, $sortingFilter: [MediaSort!]
         }
     }
 }
+
+query getAllDetailsOfAnime($id: Int!) {
+    Media(id: $id) {
+        title {
+            english
+            romaji
+        }
+        type
+        status
+        startDate {
+            year
+            month
+            day
+        }
+        endDate {
+            year
+            month
+            day
+        }
+        episodes
+        chapters
+        volumes
+        genres
+        season
+        seasonYear
+    }
+}
