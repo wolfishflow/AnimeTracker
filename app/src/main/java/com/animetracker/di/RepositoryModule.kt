@@ -12,7 +12,7 @@ import dagger.hilt.android.components.ApplicationComponent
 class RepositoryModule {
 
     @Provides
-    fun provideAnimeRepository(apolloClient: ApolloClient) : AnimeRepository {
+    fun provideAnimeRepository(apolloClient: ApolloClient): AnimeRepository {
         return AnimeRepository(apolloClient)
     }
 }
