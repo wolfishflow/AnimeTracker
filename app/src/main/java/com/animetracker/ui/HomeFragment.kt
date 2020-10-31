@@ -38,9 +38,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = AnimeSortedByAdapter()
+        adapter = AnimeSortedByAdapter ()
         recyclerView = binding.recyclerView
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager = GridLayoutManager (context, 2)
         recyclerView.adapter = adapter
         lifecycleScope.launch {
             homeViewModel.trendingAnime.collect { pagingData ->
