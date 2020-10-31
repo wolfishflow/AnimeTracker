@@ -7,7 +7,9 @@ import androidx.appcompat.widget.Toolbar
 import com.animetracker.R
 import com.animetracker.databinding.ActivityMainBinding
 import com.google.android.material.bottomappbar.BottomAppBar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
