@@ -25,7 +25,10 @@ jobs:
     # Runs a single command using the runners shell
     - name: Run a one-line script
       run: echo Hello, world!
-        
+
+    - name: Run misspell with reviewdog
+      uses: reviewdog/action-misspell@v1.2.0
+
     - name: Run ktlint with reviewdog
       uses: ScaCap/action-ktlint@1.1
       with:
