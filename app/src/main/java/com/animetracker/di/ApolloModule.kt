@@ -1,15 +1,22 @@
-package com.animetracker.network
+package com.animetracker.di
 
 import com.apollographql.apollo.ApolloClient
 import com.ihsanbal.logging.Level
 import com.ihsanbal.logging.LoggingInterceptor
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
 
-class AniListClient {
+@Module
+@InstallIn(ApplicationComponent::class)
+class ApolloModule {
 
     private var apolloClient: ApolloClient? = null
 
-    fun getClient(): ApolloClient {
+    @Provides
+    fun provideApolloClient(): ApolloClient {
         apolloClient?.let { return@let }
         apolloClient = createClient()
         return apolloClient as ApolloClient
