@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,7 @@ import coil.api.load
 import com.animetracker.databinding.AtpItemBinding
 
 // todo rename this class
-class AnimeSortedByAdapter constructor(private val onClick: (GetAnimeSortedByPopularityQuery.Medium) -> Unit) :
+class AnimeSortedByAdapter constructor(private val onClick: (GetAnimeSortedByPopularityQuery.Medium, ImageView) -> Unit) :
     PagingDataAdapter<GetAnimeSortedByPopularityQuery.Medium, AnimeSortedByViewHolder>(AnimeSortedByComparator) {
     override fun onBindViewHolder(holder: AnimeSortedByViewHolder, position: Int) {
         holder.setData(getItem(position)!!, onClick)
@@ -30,7 +31,7 @@ class AnimeSortedByAdapter constructor(private val onClick: (GetAnimeSortedByPop
 
 // TODO determine how to refactor the ViewHolder + adapter for reusability?
 class AnimeSortedByViewHolder(private val binding: AtpItemBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun setData(data: GetAnimeSortedByPopularityQuery.Medium, onClick: (GetAnimeSortedByPopularityQuery.Medium) -> Unit) {
+    fun setData(data: GetAnimeSortedByPopularityQuery.Medium, onClick: (GetAnimeSortedByPopularityQuery.Medium, ImageView) -> Unit) {
 
         val title = data.title?.let {
             with(it) {
@@ -49,13 +50,13 @@ class AnimeSortedByViewHolder(private val binding: AtpItemBinding) : RecyclerVie
         }
 
         binding.titleTextView.text = title
-        binding.imageView.load(data.coverImage?.extraLarge) {
+        binding.coverImageView.load(data.coverImage?.extraLarge) {
             crossfade(300)
             data.coverImage?.color?.let { placeholder(ColorDrawable(Color.parseColor(it))) }
         }
 
         binding.root.setOnClickListener{
-            onClick(data)
+            onClick(data, binding.coverImageView)
         }
     }
 }

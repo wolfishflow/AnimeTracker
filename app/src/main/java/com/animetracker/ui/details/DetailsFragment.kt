@@ -3,6 +3,7 @@ package com.animetracker.ui.details
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import coil.api.load
 import com.animetracker.databinding.DetailsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.lang.StringBuilder
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
@@ -30,6 +32,11 @@ class DetailsFragment : Fragment() {
         return binding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -37,6 +44,8 @@ class DetailsFragment : Fragment() {
 
     @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         detailsViewModel.fetchDetails(args.animeId)
 
         detailsViewModel.detailsLiveData.observe(viewLifecycleOwner) { data ->
@@ -46,8 +55,36 @@ class DetailsFragment : Fragment() {
                     coverImage?.color?.let { placeholder(ColorDrawable(Color.parseColor(it))) }
                 }
                 binding.titleTextView.text = title?.english ?: title?.romaji
-                binding.typeTextView.text = type?.rawValue
-                binding.statusTextView.text = status?.rawValue
+                binding.typeTextView.text = type?.rawValue ?: "Unavailable" //TODO - perhaps I can validate in VM?
+                binding.statusTextView.text = status?.rawValue ?: "Unavailable"
+
+                startDate?.let { date ->
+                    //TODO figure out how to handle null + separate int based fields (excluding year)
+                    // "startDate": {
+                    //    "__typename": "FuzzyDate",
+                    //    "year": 2020,
+                    //    "month": 10,
+                    //    "day": 3
+                    // }
+                }
+                endDate?.let {
+                    //TODO figure out how to handle null + separate int based fields
+                }
+
+                binding.episodesTextView.text = episodes?.toString() ?: "N/A"
+                binding.chaptersTextView.text = chapters?.toString() ?: "N/A"
+                binding.volumesTextView.text = volumes?.toString() ?: "N/A"
+
+                genres?.let { list ->
+                    val stringBuilder = StringBuilder()
+                    list.map {
+                        stringBuilder.append(it).append(" ")
+                    }
+                    binding.genresTextView.text = stringBuilder.toString()
+                }
+
+                binding.seasonTextView.text = season?.rawValue ?: "Unavailable"
+                binding.seasonYearTextView.text = seasonYear?.toString() ?: "N/A"
             }
         }
     }

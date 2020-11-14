@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.animetracker.R
 import com.animetracker.databinding.FragmentHomeBinding
 import com.animetracker.ui.AnimeSortedByAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,8 +60,12 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun navigateToDetails(data: GetAnimeSortedByPopularityQuery.Medium) {
+    private fun navigateToDetails(data: GetAnimeSortedByPopularityQuery.Medium, imageView: ImageView) {
         val detailsDirection = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(data.id)
-        findNavController().navigate(detailsDirection)
+        //TODO figure out why shared element isn't working
+        val extras = FragmentNavigatorExtras(
+            imageView to "coverImageView"
+        )
+        findNavController().navigate(detailsDirection, extras)
     }
 }
