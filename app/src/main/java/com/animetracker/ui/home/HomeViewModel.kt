@@ -1,4 +1,4 @@
-package com.animetracker.ui
+package com.animetracker.ui.home
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel

@@ -26,6 +26,11 @@ query getAllDetailsOfAnime($id: Int!) {
             english
             romaji
         }
+        coverImage {
+            extraLarge
+            large
+            color
+        }
         type
         status
         startDate {

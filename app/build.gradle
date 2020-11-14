@@ -5,6 +5,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint").version("$ktlint_gradle_version")
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -43,7 +44,7 @@ android {
 }
 
 dependencies {
-    def nav_version = "2.3.1"
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     def lifecycle_version = "2.2.0"
     def paging_version = "3.0.0-alpha07"
 
@@ -69,6 +70,7 @@ dependencies {
 
     //Viewmodel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
     //okHTTP
     implementation 'com.squareup.okhttp3:okhttp:4.8.1'
