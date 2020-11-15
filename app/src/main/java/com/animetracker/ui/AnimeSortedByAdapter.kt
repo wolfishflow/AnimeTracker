@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,10 +12,11 @@ import coil.api.load
 import com.animetracker.databinding.AtpItemBinding
 
 // todo rename this class
-class AnimeSortedByAdapter :
-    PagingDataAdapter<GetAnimeSortedByPopularityQuery.Medium, AnimeSortedByViewHolder>(AnimeSortedByComparator) {
+class AnimeSortedByAdapter constructor(
+    private val onClick: (GetAnimeSortedByPopularityQuery.Medium, ImageView) -> Unit
+) : PagingDataAdapter<GetAnimeSortedByPopularityQuery.Medium, AnimeSortedByViewHolder>(AnimeSortedByComparator) {
     override fun onBindViewHolder(holder: AnimeSortedByViewHolder, position: Int) {
-        holder.setData(getItem(position)!!)
+        holder.setData(getItem(position)!!, onClick)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimeSortedByViewHolder {
@@ -30,7 +32,13 @@ class AnimeSortedByAdapter :
 
 // TODO determine how to refactor the ViewHolder + adapter for reusability?
 class AnimeSortedByViewHolder(private val binding: AtpItemBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun setData(data: GetAnimeSortedByPopularityQuery.Medium) {
+    fun setData(
+        data: GetAnimeSortedByPopularityQuery.Medium,
+        onClick: (
+            GetAnimeSortedByPopularityQuery.Medium,
+            ImageView
+        ) -> Unit
+    ) {
 
         val title = data.title?.let {
             with(it) {
@@ -49,9 +57,16 @@ class AnimeSortedByViewHolder(private val binding: AtpItemBinding) : RecyclerVie
         }
 
         binding.titleTextView.text = title
-        binding.imageView.load(data.coverImage?.extraLarge) {
+        binding.coverImageView.transitionName = data.id.toString()
+        binding.coverImageView.load(data.coverImage?.extraLarge) {
             crossfade(300)
+            // Needed for shared element transition
+            allowHardware(false)
             data.coverImage?.color?.let { placeholder(ColorDrawable(Color.parseColor(it))) }
+        }
+
+        binding.root.setOnClickListener {
+            onClick(data, binding.coverImageView)
         }
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/image_view"
+        android:id="@+id/coverImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/todo"
@@ -26,9 +26,9 @@
         android:alpha="0.7"
         android:background="?attr/colorSurface"
         android:importantForAccessibility="no"
-        app:layout_constraintBottom_toBottomOf="@id/image_view"
+        app:layout_constraintBottom_toBottomOf="@id/coverImageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/image_view"
+        app:layout_constraintStart_toStartOf="@id/coverImageView"
         app:layout_constraintTop_toTopOf="@id/title_textView"
         tools:layout_width="230dp" />
 
@@ -42,7 +42,7 @@
         android:lines="2"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        app:layout_constraintBottom_toBottomOf="@id/image_view"
+        app:layout_constraintBottom_toBottomOf="@id/coverImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="This is the title \nWith a new line" />
