@@ -10,7 +10,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/todo"
-        android:transitionName="coverImageView"
         android:minWidth="210dp"
         android:minHeight="300dp"
         android:scaleType="fitXY"

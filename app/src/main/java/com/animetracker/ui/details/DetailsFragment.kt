@@ -1,9 +1,7 @@
 package com.animetracker.ui.details
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.transition.TransitionInflater
+import androidx.transition.TransitionInflater
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.api.load
+import coil.decode.DataSource
+import coil.request.Request
 import com.animetracker.databinding.DetailsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -35,6 +35,7 @@ class DetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        postponeEnterTransition()
     }
 
     override fun onDestroyView() {
@@ -45,14 +46,18 @@ class DetailsFragment : Fragment() {
     @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         detailsViewModel.fetchDetails(args.animeId)
-
+        binding.coverImageView.transitionName = args.animeId.toString()
         detailsViewModel.detailsLiveData.observe(viewLifecycleOwner) { data ->
             with(data.media!!) {
                 binding.coverImageView.load(coverImage?.extraLarge) {
-                    crossfade(300)
-                    coverImage?.color?.let { placeholder(ColorDrawable(Color.parseColor(it))) }
+                    // Needed for shared element transition
+                    allowHardware(false)
+                    listener(
+                        onSuccess = { _: Request, _: DataSource ->
+                            startPostponedEnterTransition()
+                        }
+                    )
                 }
                 binding.titleTextView.text = title?.english ?: title?.romaji
                 binding.typeTextView.text = type?.rawValue ?: "Unavailable" //TODO - perhaps I can validate in VM?

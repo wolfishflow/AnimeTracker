@@ -50,8 +50,11 @@ class AnimeSortedByViewHolder(private val binding: AtpItemBinding) : RecyclerVie
         }
 
         binding.titleTextView.text = title
+        binding.coverImageView.transitionName = data.id.toString()
         binding.coverImageView.load(data.coverImage?.extraLarge) {
             crossfade(300)
+            // Needed for shared element transition
+            allowHardware(false)
             data.coverImage?.color?.let { placeholder(ColorDrawable(Color.parseColor(it))) }
         }
 

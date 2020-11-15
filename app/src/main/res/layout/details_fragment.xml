@@ -15,9 +15,9 @@
         <ImageView
             android:contentDescription="@string/todo"
             android:id="@+id/coverImageView"
-            android:transitionName="coverImageView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:adjustViewBounds="true"
+            android:layout_height="400dp"/>
 
         <TextView
             android:id="@+id/titleTextView"

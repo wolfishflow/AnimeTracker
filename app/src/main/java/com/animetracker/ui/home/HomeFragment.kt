@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.animetracker.R
+import androidx.transition.TransitionInflater
 import com.animetracker.databinding.FragmentHomeBinding
 import com.animetracker.ui.AnimeSortedByAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,8 +26,10 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by viewModels()
 
-    private lateinit var adapter: AnimeSortedByAdapter
-    private lateinit var recyclerView: RecyclerView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,14 +48,19 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = AnimeSortedByAdapter(this::navigateToDetails)
-        recyclerView = binding.recyclerView
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
-        recyclerView.adapter = adapter
+        val adapter = AnimeSortedByAdapter(this::navigateToDetails)
+        binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
+        binding.recyclerView.adapter = adapter
+
+        postponeEnterTransition()
+        binding.recyclerView.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
+
         lifecycleScope.launch {
             homeViewModel.trendingAnime.collectLatest { pagingData ->
                 pagingData.let {
-                    // todo handle empty data?
+                    // TODO handle empty data?
                     adapter.submitData(it)
                 }
             }
@@ -62,10 +69,12 @@ class HomeFragment : Fragment() {
 
     private fun navigateToDetails(data: GetAnimeSortedByPopularityQuery.Medium, imageView: ImageView) {
         val detailsDirection = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(data.id)
-        //TODO figure out why shared element isn't working
-        val extras = FragmentNavigatorExtras(
-            imageView to "coverImageView"
+
+        findNavController().navigate(
+            detailsDirection,
+            FragmentNavigator.Extras.Builder()
+                .addSharedElement(imageView, data.id.toString())
+                .build()
         )
-        findNavController().navigate(detailsDirection, extras)
     }
 }
