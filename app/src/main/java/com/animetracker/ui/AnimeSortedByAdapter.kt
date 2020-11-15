@@ -12,8 +12,9 @@ import coil.api.load
 import com.animetracker.databinding.AtpItemBinding
 
 // todo rename this class
-class AnimeSortedByAdapter constructor(private val onClick: (GetAnimeSortedByPopularityQuery.Medium, ImageView) -> Unit) :
-    PagingDataAdapter<GetAnimeSortedByPopularityQuery.Medium, AnimeSortedByViewHolder>(AnimeSortedByComparator) {
+class AnimeSortedByAdapter constructor(
+    private val onClick:(GetAnimeSortedByPopularityQuery.Medium, ImageView) -> Unit
+) : PagingDataAdapter<GetAnimeSortedByPopularityQuery.Medium, AnimeSortedByViewHolder>(AnimeSortedByComparator) {
     override fun onBindViewHolder(holder: AnimeSortedByViewHolder, position: Int) {
         holder.setData(getItem(position)!!, onClick)
     }
@@ -31,7 +32,9 @@ class AnimeSortedByAdapter constructor(private val onClick: (GetAnimeSortedByPop
 
 // TODO determine how to refactor the ViewHolder + adapter for reusability?
 class AnimeSortedByViewHolder(private val binding: AtpItemBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun setData(data: GetAnimeSortedByPopularityQuery.Medium, onClick: (GetAnimeSortedByPopularityQuery.Medium, ImageView) -> Unit) {
+    fun setData(
+        data: GetAnimeSortedByPopularityQuery.Medium,
+        onClick: (GetAnimeSortedByPopularityQuery.Medium, ImageView) -> Unit) {
 
         val title = data.title?.let {
             with(it) {

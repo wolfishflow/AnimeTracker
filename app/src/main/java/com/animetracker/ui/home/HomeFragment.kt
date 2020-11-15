@@ -28,7 +28,8 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        sharedElementReturnTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
     }
 
     override fun onCreateView(
@@ -67,7 +68,10 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun navigateToDetails(data: GetAnimeSortedByPopularityQuery.Medium, imageView: ImageView) {
+    private fun navigateToDetails(
+        data: GetAnimeSortedByPopularityQuery.Medium,
+        imageView: ImageView
+    ) {
         val detailsDirection = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(data.id)
 
         findNavController().navigate(

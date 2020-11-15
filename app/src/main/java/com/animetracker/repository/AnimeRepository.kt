@@ -17,7 +17,7 @@ class AnimeRepository constructor(private val apolloClient: ApolloClient) {
     }.flow
 
     @ExperimentalCoroutinesApi
-    suspend fun getAnimeDetails (animeId: Int): Response<GetAllDetailsOfAnimeQuery.Data> {
+    suspend fun getAnimeDetails(animeId: Int): Response<GetAllDetailsOfAnimeQuery.Data> {
         return apolloClient.query(GetAllDetailsOfAnimeQuery(animeId)).toDeferred().await()
     }
 }
