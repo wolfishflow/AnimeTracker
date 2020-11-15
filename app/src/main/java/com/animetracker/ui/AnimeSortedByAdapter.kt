@@ -13,7 +13,7 @@ import com.animetracker.databinding.AtpItemBinding
 
 // todo rename this class
 class AnimeSortedByAdapter constructor(
-    private val onClick:(GetAnimeSortedByPopularityQuery.Medium, ImageView) -> Unit
+    private val onClick: (GetAnimeSortedByPopularityQuery.Medium, ImageView) -> Unit
 ) : PagingDataAdapter<GetAnimeSortedByPopularityQuery.Medium, AnimeSortedByViewHolder>(AnimeSortedByComparator) {
     override fun onBindViewHolder(holder: AnimeSortedByViewHolder, position: Int) {
         holder.setData(getItem(position)!!, onClick)
@@ -34,7 +34,11 @@ class AnimeSortedByAdapter constructor(
 class AnimeSortedByViewHolder(private val binding: AtpItemBinding) : RecyclerView.ViewHolder(binding.root) {
     fun setData(
         data: GetAnimeSortedByPopularityQuery.Medium,
-        onClick: (GetAnimeSortedByPopularityQuery.Medium, ImageView) -> Unit) {
+        onClick: (
+            GetAnimeSortedByPopularityQuery.Medium,
+            ImageView
+        ) -> Unit
+    ) {
 
         val title = data.title?.let {
             with(it) {
@@ -61,7 +65,7 @@ class AnimeSortedByViewHolder(private val binding: AtpItemBinding) : RecyclerVie
             data.coverImage?.color?.let { placeholder(ColorDrawable(Color.parseColor(it))) }
         }
 
-        binding.root.setOnClickListener{
+        binding.root.setOnClickListener {
             onClick(data, binding.coverImageView)
         }
     }
