@@ -9,10 +9,11 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import com.animetracker.GetAnimeSortedByPopularityQuery
 import com.animetracker.databinding.AtpItemBinding
 
 // todo rename this class
-class AnimeSortedByAdapter constructor(
+class AnimeSortedByDataAdapter constructor(
     private val onClick: (GetAnimeSortedByPopularityQuery.Medium, ImageView) -> Unit
 ) : PagingDataAdapter<GetAnimeSortedByPopularityQuery.Medium, AnimeSortedByViewHolder>(AnimeSortedByComparator) {
     override fun onBindViewHolder(holder: AnimeSortedByViewHolder, position: Int) {

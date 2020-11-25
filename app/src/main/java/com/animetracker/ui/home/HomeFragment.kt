@@ -13,8 +13,9 @@ import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.transition.TransitionInflater
+import com.animetracker.GetAnimeSortedByPopularityQuery
 import com.animetracker.databinding.FragmentHomeBinding
-import com.animetracker.ui.AnimeSortedByAdapter
+import com.animetracker.ui.AnimeSortedByDataAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -49,7 +50,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = AnimeSortedByAdapter(this::navigateToDetails)
+        val adapter = AnimeSortedByDataAdapter(this::navigateToDetails)
         binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
         binding.recyclerView.adapter = adapter
 

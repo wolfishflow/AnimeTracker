@@ -1,15 +1,16 @@
 package com.animetracker.ui
 
-import GetAnimeSortedByPopularityQuery
 import androidx.paging.PagingSource
+import com.animetracker.GetAnimeSortedByPopularityQuery
+import com.animetracker.type.MediaSort
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.toInput
 import com.apollographql.apollo.coroutines.toDeferred
-import type.MediaSort
+import javax.inject.Inject
 
 // todo rename this class
-// TODO I should be able to use @Inject here, but I seem to have some dependency issue
-class AnimeSortedByPagingSource constructor(private val apolloClient: ApolloClient) : PagingSource<Int, GetAnimeSortedByPopularityQuery.Medium>() {
+class AnimeSortedByPagingSource @Inject constructor(private val apolloClient: ApolloClient) :
+    PagingSource<Int, GetAnimeSortedByPopularityQuery.Medium>() {
     override suspend fun load(params: LoadParams<Int>):
         LoadResult<Int, GetAnimeSortedByPopularityQuery.Medium> {
         val sortingFilter = (listOf(MediaSort.TRENDING_DESC, MediaSort.POPULARITY_DESC)).toInput()
