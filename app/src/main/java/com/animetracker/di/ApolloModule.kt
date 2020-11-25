@@ -8,18 +8,16 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
+import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
 class ApolloModule {
 
-    private var apolloClient: ApolloClient? = null
-
+    @Singleton
     @Provides
     fun provideApolloClient(): ApolloClient {
-        apolloClient?.let { return@let }
-        apolloClient = createClient()
-        return apolloClient as ApolloClient
+        return createClient()
     }
 
     private fun createClient(): ApolloClient {
